@@ -61,6 +61,8 @@ The `canvas-piechart` element draws a piechart on a HTML5 Canvas
           this.ctx_ = this.$.canvas.getContext("2d");
         },
         update_ : function() {
+          if (!this.data) 
+             return;
           this.async(this.render_);
         },
         getColors_ : function() {
