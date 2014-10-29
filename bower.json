@@ -5,7 +5,7 @@
     "Uemit Seren <uemit.seren@gmail.com>"
   ],
   "description": "Element to draw a piechart on a HTML5 Canvas.",
-  "keywords": "piechart, polymer, web-components",
+  "keywords": ["piechart", "polymer", "web-components"],
   "main": "canvas-piechart.html",
   "license": "MIT",
   "homepage": "https://github.com/timeu/canvas-piechart/",
