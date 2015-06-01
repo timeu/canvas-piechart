@@ -10,15 +10,15 @@
   "license": "MIT",
   "homepage": "https://github.com/timeu/canvas-piechart/",
   "ignore": [
-    "**/.*"
+    "/.*",
+    "/test/",
+    "/demo/"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^0.9.0"
+    "polymer": "Polymer/polymer#^1.0.0"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#^0.9.0",
-    "test-fixture": "PolymerElements/test-fixture#^0.9.0",
-    "web-component-tester": "Polymer/web-component-tester#^2.2.3",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "*"
   }
 }
