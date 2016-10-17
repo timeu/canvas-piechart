@@ -31,9 +31,20 @@ Or [download as ZIP](https://github.com/timeu/canvas-piechart/archive/master.zip
 
 3. Start using it!
 
-  ```html
+<!---
+```
+<custom-element-demo>
+  <template>
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="canvas-piechart.html">
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
+```html
   <canvas-piechart size="250" data="[10,20,50,20]"></canvas-piechart>
-  ```
+```
 
 ## Options
 
