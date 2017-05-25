@@ -1,16 +1,25 @@
+[![Build Status](https://travis-ci.org/timeu/canvas-piechart.svg?branch=master)](https://travis-ci.org/timeu/canvas-piechart) [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/timeu/canvas-piechart)
+
+
 # &lt;canvas-piechart&gt;
 
 > A web-component to draw a piechart using Polymer and HTML5 Canvas.
 
+**This branch (master) works only with Polymer 2.x. For a Polymer 1.x version check out the 1.x branch**
+
+## Versions (Polymer 2.x vs Polymer 1.x)
+The *master* branch and all *2.x.x* releases require `Polymer 2.x`.
+For `Polymer 1.x` support use *1.x.x* releases and the [1.x branch](https://github.com/timeu/canvas-piechart/tree/1.x).
+
 ## Demo
-> [Check it live](http://timeu.github.io/canvas-piechart/components/canvas-piechart/demo/index.html).
+> [Check it live](https://www.webcomponents.org/element/timeu/canvas-piechart).
 
 ## Install
 
 Install the component using [Bower](http://bower.io/):
 
 ```sh
-$ bower install --save canvas-piechart 
+$ bower install --save canvas-piechart
 ```
 
 Or [download as ZIP](https://github.com/timeu/canvas-piechart/archive/master.zip).
@@ -45,17 +54,6 @@ Or [download as ZIP](https://github.com/timeu/canvas-piechart/archive/master.zip
 ```html
   <canvas-piechart size="250" data="[10,20,50,20]"></canvas-piechart>
 ```
-
-## Options
-
-See the [component page](http://timeu.github.io/canvas-piechart) for more information.
-
-
-## Browser Support
-
-![IE](https://raw.github.com/paulirish/browser-logos/master/internet-explorer/internet-explorer_48x48.png) | ![Chrome](https://raw.github.com/paulirish/browser-logos/master/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/paulirish/browser-logos/master/firefox/firefox_48x48.png) | ![Opera](https://raw.github.com/paulirish/browser-logos/master/opera/opera_48x48.png) | ![Safari](https://raw.github.com/paulirish/browser-logos/master/safari/safari_48x48.png)
---- | --- | --- | --- | --- |
-IE 10+ ✔ | Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ |
 
 ## Contributing
 

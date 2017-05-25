@@ -22,28 +22,60 @@ Example:
 <script>
 (function() {
 
-  var DEFAULT_COLORS20  =  ["#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#2ca02c", "#98df8a", "#d62728", "#ff9896", "#9467bd", "#c5b0d5", "#8c564b", "#c49c94", "#e377c2", "#f7b6d2", "#7f7f7f", "#c7c7c7", "#bcbd22", "#dbdb8d", "#17becf", "#9edae5"];
-  var DEFAULT_COLORS10  =  ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"];
+  var DEFAULT_COLORS16 = [
+    '#f44336',
+    '#e91e63',
+    '#9c27b0',
+    '#673ab7',
+    '#3f51b5',
+    '#1e88e5',
+    '#03a9f4',
+    '#00bcd4',
+    '#009688',
+    '#4caf50',
+    '#8bc34a',
+    '#cddc39',
+    '#ffeb3b',
+    '#ffc107',
+    '#ff9800',
+    '#ff5722'
+  ];
+  var DEFAULT_COLORS8 = [
+    '#f44336',
+    '#9c27b0',
+    '#3f51b5',
+    '#03a9f4',
+    '#009688',
+    '#8bc34a',
+    '#ffeb3b',
+    '#ff9800'
+  ];
+  var DEFAULT_COLORS4 = [
+    '#f44336',
+    '#3f51b5',
+    '#8bc34a',
+    '#ffeb3b',
+  ];
 
   Polymer({
-  
+
     is: 'canvas-piechart',
-    
+
     properties: {
       /**
       * The `colors` attribute specifies the colors to be used for each slice.
       * If no colors are specified then the default-colors are used.
-      * 
+      *
       * @attribute colors
       */
       colors: {
-        type:Array, 
+        type:Array,
         value: function() { return []; }
       },
 
       /**
       * The `size` property specifies the size of the piechart (Default: 50).
-      * 
+      *
       * @attribute size
       */
       size: {
@@ -53,13 +85,13 @@ Example:
 
       /**
        * The `data` property specifies the values for each slice .
-       * 
+       *
        * @attribute data
       */
       data : {
         type:Array,
         value: function() { return []; }
-      } 
+      }
     },
     observers: [
       'render(colors,data,size)'
@@ -70,10 +102,17 @@ Example:
         }
         return this._ctx;
     },
-    _getColors : function() {
-      var colors = this.colors;
+    _getColors : function(colors) {
       if (!colors || colors.length == 0) {
-        colors = this.data.length > 10  ? DEFAULT_COLORS20 : DEFAULT_COLORS10;
+        if (this.data.length > 8) {
+          colors = DEFAULT_COLORS16;
+        }
+        else if (this.data.length > 4) {
+          colors = DEFAULT_COLORS8;
+        }
+        else {
+          colors = DEFAULT_COLORS4;
+        }
       }
       return colors;
     },

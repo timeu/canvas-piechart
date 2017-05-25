@@ -5,15 +5,29 @@
   <title>canvas-piechart Demo</title>
 
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+
   <link rel="import" href="../canvas-piechart.html">
 
+  <style is="custom-style" include="demo-pages-shared-styles">
+    demo-snippet {
+      margin-bottom: 40px;
+    }
+    .vertical-section-container {
+      max-width: 550px;
+    }
+  </style>
 </head>
 <body>
-
-  <p>An example of using <code>&lt;canvas-piechart></code>:</p>
-
-  <canvas-piechart size="250" data="[10,50,20,10]"></canvas-piechart>
-  
-
+  <div class="vertical-section-container centered">
+    <p>An example of using <code>&lt;canvas-piechart></code>:</p>
+    <demo-snippet class="centered-demo">
+      <template>
+        <canvas-piechart size="250" data="[10,50,20,10]"></canvas-piechart>
+      </template>
+    </demo-snippet>
+  </div>
 </body>
 </html>
