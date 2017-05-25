@@ -1,15 +1,12 @@
-[![Build Status](https://travis-ci.org/timeu/canvas-piechart.svg?branch=master)](https://travis-ci.org/timeu/canvas-piechart) [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/timeu/canvas-piechart)
+[![Build Status](https://travis-ci.org/timeu/canvas-piechart.svg?branch=1.x)](https://travis-ci.org/timeu/canvas-piechart) [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/timeu/canvas-piechart)
 
 
 # &lt;canvas-piechart&gt;
 
 > A web-component to draw a piechart using Polymer and HTML5 Canvas.
 
-**This branch (master) works only with Polymer 2.x. For a Polymer 1.x version check out the 1.x branch**
+**This branch (1.x) works only with Polymer 1.x. For a Polymer 2.x version check out the [master branch](https://github.com/timeu/canvas-piechart/tree/master)**
 
-## Versions (Polymer 2.x vs Polymer 1.x)
-The *master* branch and all *2.x.x* releases require `Polymer 2.x`.
-For `Polymer 1.x` support use *1.x.x* releases and the [1.x branch](https://github.com/timeu/canvas-piechart/tree/1.x).
 
 ## Demo
 > [Check it live](https://www.webcomponents.org/element/timeu/canvas-piechart).
