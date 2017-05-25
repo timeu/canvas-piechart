@@ -1,140 +1,124 @@
-<link rel="import" href="../polymer/polymer.html">
-
-<!--
-The `canvas-piechart` element draws a piechart on a HTML5 Canvas
-
-Example:
-
-    <canvas-piechart size="50" data="[10,20,40,50]"></canvas-piechart>
-
-@demo
-@element canvas-piechart
-@blurb Draws a piechart on a HTMl5 Canvas.
-@status alpha
-@homepage http://timeu.github.io/canvas-piechart
--->
-<dom-module id="canvas-piechart">
-    <template>
-        <canvas id="canvas" width$="[[size]]" height$="[[size]]" />
-    </template>
-</dom-module>
+<link rel="import" href="../polymer/lib/mixins/property-accessors.html">
 
 <script>
-(function() {
 
-  var DEFAULT_COLORS16 = [
-    '#f44336',
-    '#e91e63',
-    '#9c27b0',
-    '#673ab7',
-    '#3f51b5',
-    '#1e88e5',
-    '#03a9f4',
-    '#00bcd4',
-    '#009688',
-    '#4caf50',
-    '#8bc34a',
-    '#cddc39',
-    '#ffeb3b',
-    '#ffc107',
-    '#ff9800',
-    '#ff5722'
-  ];
-  var DEFAULT_COLORS8 = [
-    '#f44336',
-    '#9c27b0',
-    '#3f51b5',
-    '#03a9f4',
-    '#009688',
-    '#8bc34a',
-    '#ffeb3b',
-    '#ff9800'
-  ];
-  var DEFAULT_COLORS4 = [
-    '#f44336',
-    '#3f51b5',
-    '#8bc34a',
-    '#ffeb3b',
-  ];
+  /**
+  * `svg-piechart`
+  *
+  *  The `canvas-piechart` element draws a piechart on a HTML5 Canvas
+  *
+  *  Example:
+  *
+  *   <canvas-piechart size="50" data="[10,20,40,50]"></canvas-piechart>
+  *
+  * @customElement
+  * @element canvas-piechart
+  * @demo demo/index.html
+  */
+  class CanvasPiechart extends Polymer.PropertyAccessors(HTMLElement) {
 
-  Polymer({
+    static get DEFAULT_COLORS16() {return [ '#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5','#1e88e5','#03a9f4','#00bcd4','#009688','#4caf50','#8bc34a',
+    '#cddc39','#ffeb3b','#ffc107','#ff9800','#ff5722'];}
 
-    is: 'canvas-piechart',
+    static get DEFAULT_COLORS8() {return ['#f44336','#9c27b0','#3f51b5',
+    '#03a9f4','#009688','#8bc34a','#ffeb3b','#ff9800'];}
 
-    properties: {
-      /**
-      * The `colors` attribute specifies the colors to be used for each slice.
-      * If no colors are specified then the default-colors are used.
-      *
-      * @attribute colors
-      */
-      colors: {
-        type:Array,
-        value: function() { return []; }
-      },
+    static get DEFAULT_COLORS4() {return ['#f44336','#3f51b5','#8bc34a','#ffeb3b',]}
 
-      /**
-      * The `size` property specifies the size of the piechart (Default: 50).
-      *
-      * @attribute size
-      */
-      size: {
-        type:Number,
-        value:50
-      },
 
-      /**
-       * The `data` property specifies the values for each slice .
-       *
-       * @attribute data
-      */
-      data : {
-        type:Array,
-        value: function() { return []; }
-      }
-    },
-    observers: [
-      'render(colors,data,size)'
-    ],
-    _getCtx : function() {
-        if (!this._ctx) {
-          this._ctx = this.$.canvas.getContext("2d");
-        }
-        return this._ctx;
-    },
-    _getColors : function(colors) {
-      if (!colors || colors.length == 0) {
-        if (this.data.length > 8) {
-          colors = DEFAULT_COLORS16;
-        }
-        else if (this.data.length > 4) {
-          colors = DEFAULT_COLORS8;
-        }
-        else {
-          colors = DEFAULT_COLORS4;
+    static get observedAttributes() {return ['colors','size','data']; }
+
+    constructor() {
+      super();
+      this.attachShadow({mode: 'open'});
+      this.data = [];
+      this.size = 50;
+      this.colors = [];
+    }
+
+    connectedCallback() {
+      this._enableProperties();
+    }
+
+    ready() {
+      this._init();
+      super.ready();
+    }
+
+    _propertiesChanged() {
+      this._render();
+    }
+
+    _attributeToProperty(attribute, value, type) {
+      if (!type) {
+        switch (attribute) {
+          case "size":
+            type = String;
+          break;
+          case "data":
+          case "colors":
+            type = Array
+          break
         }
       }
-      return colors;
-    },
-    _calculateTotal: function() {
-      var total = 0;
-      for (var i =0;i<this.data.length;i++) {
+      super._attributeToProperty(attribute, value,type);
+    }
+
+    _init() {
+      let canvas = document.createElement('canvas')
+      canvas.setAttribute('width',this.size);
+      canvas.setAttribute('height',this.size);
+      this.shadowRoot.appendChild(canvas);
+      console.log('_init');
+    }
+
+    _calculateTotal() {
+      let total = 0;
+      for (let i = 0; i < this.data.length; i++) {
         total += this.data[i];
       }
       return total;
-    },
-    render : function() {
-      var ctx = this._getCtx();
+    }
+
+    _computePath(arc) {
+      return 'M180,180 L' + arc.x1 + ',' + arc.y1 + ' A180,180 0 ' + arc.largeArcFlag + ',1 ' + arc.x2 + ',' + arc.y2 + ' z';
+    }
+
+    _getColors(colors) {
+      if (!colors || colors.length == 0) {
+        if (this.data.length > 8) {
+          colors = this.constructor.DEFAULT_COLORS16;
+        }
+        else if (this.data.length > 4) {
+          colors = this.constructor.DEFAULT_COLORS8;
+        }
+        else {
+          colors = this.constructor.DEFAULT_COLORS4;
+        }
+      }
+      return colors;
+    }
+    get ctx() {
+      if (!this.__ctx) {
+          this.__ctx = this.shadowRoot.querySelector('canvas').getContext("2d");
+      }
+      return this.__ctx;
+    }
+
+    _render() {
+      let ctx = this.ctx
       if (!ctx)
         return;
-      ctx.clearRect(0, 0, this.size,this.size);
-      var colors = this._getColors(colors);
-      var radius = this.size/2;
-      var lastend = 1.5 * Math.PI;
-      var total = this._calculateTotal();
-      for (var i = 0; i < this.data.length; i++) {
-        var slice = this.data[i];
-        var arcDest = Math.PI * 2 * (slice / total);
+      let canvas = this.shadowRoot.querySelector('canvas');
+      canvas.width=this.size;
+      canvas.height=this.size;
+      let colors = this._getColors(this.colors);
+      let radius = this.size/2;
+      let lastend = 1.5 * Math.PI;
+      let total = this._calculateTotal();
+      for (let i = 0; i < this.data.length; i++) {
+        let slice = this.data[i];
+        let arcDest = Math.PI * 2 * (slice / total);
         ctx.fillStyle = colors[i];
         ctx.beginPath();
         ctx.moveTo(radius, radius);
@@ -144,9 +128,10 @@ Example:
         lastend += arcDest;
       }
     }
-  });
-})();
 
+  }
+  CanvasPiechart.createPropertiesForAttributes();
+  window.customElements.define('canvas-piechart', CanvasPiechart);
 </script>
 
 
